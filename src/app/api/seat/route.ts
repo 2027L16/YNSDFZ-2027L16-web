@@ -9,7 +9,6 @@ export async function POST(req: Request) {
     return Response.json({ error: error.message }, { status: 500 });
   }
 }
-
 class Pair {
   first: string;
   second: string;
@@ -36,9 +35,10 @@ class Seats {
         new Pair('高若元', '贺奥凯'), new Pair('樊霖洁', '仝亚盈'), new Pair('x')
       ],
       [
-        new Pair('车俊贤', '桂钰欢'), new Pair('陈柯璟', '周钇寰'),
+        new Pair('代岑', '余芃澄'), new Pair('车俊贤', '桂钰欢'),
+        new Pair('陈柯璟', '周钇寰'),
         new Pair('王传栋', '李梓维'), new Pair('郭振宇', '何炫毅'),
-        new Pair('于昕呈', '杨曜铭'), new Pair('代岑', '余芃澄')
+        new Pair('于昕呈', '杨曜铭'),
       ],
       [
         new Pair('于阅'), new Pair('刘耘松', '叶恒铭'),

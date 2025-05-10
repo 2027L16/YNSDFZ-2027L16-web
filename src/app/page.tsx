@@ -48,7 +48,7 @@ export default function SeatPage() {
       const response = await fetch('/api/seat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ time: weeksBetween }),
+        body: JSON.stringify({ time: weeksBetween - 2 }),
       });
 
       const data = await response.json();
@@ -94,7 +94,7 @@ export default function SeatPage() {
             />
           </Box> */}
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Typography variant="body1">选择一天</Typography>
+            <Typography variant="body1">选择要查询的那天（选下周某天）</Typography>
             <DatePicker
               value={selectedTime}
               onChange={(newValue) => newValue && setSelectedTime(newValue)}
@@ -107,7 +107,7 @@ export default function SeatPage() {
         </Button>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          <Typography variant="body1">门</Typography>
+          <Typography variant="body1"><strong className='text-3xl'>门</strong></Typography>
           <Table sx={{ minWidth: 650 }} aria-label="座位表">
             <TableHead>
               <TableRow>
@@ -134,11 +134,11 @@ export default function SeatPage() {
               ))}
             </TableBody>
           </Table>
-          <Typography variant="body1">窗</Typography>
+          <Typography variant="body1" className='text-3xl'><strong className='text-3xl'>窗</strong></Typography>
         </Box>
 
         <Box>
-          <p>讲台</p>
+          <strong className='text-5xl'>讲台</strong>
         </Box>
       </Box>
     </LocalizationProvider>
