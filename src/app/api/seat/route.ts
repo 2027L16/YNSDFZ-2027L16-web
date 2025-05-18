@@ -31,7 +31,7 @@ class Seats {
       ],
       [
         new Pair('韩语哲', '王奕霖'),
-        new Pair('周至柔', '刘涛'), new Pair('姜俊衔', '代一尘'),
+        new Pair('周至柔', '刘涛'), new Pair('宋欣哲', '郑光朔'),
         new Pair('高若元', '贺奥凯'), new Pair('樊霖洁', '仝亚盈'), new Pair('x')
       ],
       [
@@ -42,12 +42,12 @@ class Seats {
       ],
       [
         new Pair('于阅'), new Pair('刘耘松', '叶恒铭'),
-        new Pair('宋欣哲', '郑光朔'), new Pair('马亚勋', '邵振琦'),
-        new Pair('吴子墨', '李博文'), new Pair('邓轶辰', '李庭葳')
+        new Pair('熊晨伊', '代一尘'), new Pair('马亚勋', '李博文'),
+        new Pair('吴子墨', '邵振琦'), new Pair('邓轶辰', '李庭葳')
       ],
       [
         new Pair('李丞阳', '鲍奕丞'),
-        new Pair('熊晨伊', '龚雪丹'), new Pair('艾子喻', '单俊杰'),
+        new Pair('姜俊衔', '龚雪丹'), new Pair('艾子喻', '单俊杰'),
         new Pair('隆竞瑶', '杜卓航'), new Pair('王浩宇'), new Pair('x')
       ]
     ];
