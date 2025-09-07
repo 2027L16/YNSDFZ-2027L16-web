@@ -25,30 +25,30 @@ class Seats {
   constructor() {
     this.seats = [
       [
-        new Pair('刘一诺', '周加灵'), new Pair('蔡磊', '唐梓耀'),
-        new Pair('杨李吉', '李彦节'), new Pair('x'),
-        new Pair('蒋滇粤', '黄启宸'), new Pair('x')
+        new Pair('代岑', '李庭葳'), new Pair('何炫毅', '蒋滇粤'),
+        new Pair('郭振宇', '桂钰欢'), new Pair('x'),
+        new Pair('仝亚盈', '樊霖洁'), new Pair('x')
       ],
       [
-        new Pair('韩语哲', '王奕霖'),
-        new Pair('周至柔', '刘涛'), new Pair('宋欣哲', '郑光朔'),
-        new Pair('高若元', '贺奥凯'), new Pair('樊霖洁', '仝亚盈'), new Pair('x')
+        new Pair('蔡磊', '杨李吉'),
+        new Pair('余芃澄', '周钇寰'), new Pair('王传栋', '刘涛'),
+        new Pair('刘耘松', '王浩宇'), new Pair('单俊杰', '邵振琦'), new Pair('x')
       ],
       [
-        new Pair('代岑', '余芃澄'), new Pair('车俊贤', '桂钰欢'),
-        new Pair('陈柯璟', '周钇寰'),
-        new Pair('王传栋', '李梓维'), new Pair('郭振宇', '何炫毅'),
-        new Pair('于昕呈', '杨曜铭'),
+        new Pair('车俊贤', '鲍奕丞'), new Pair('于昕呈', '邓轶辰'),
+        new Pair('李丞阳', '高若元'),
+        new Pair('周至柔', '代一尘'), new Pair('熊晨伊', '龚雪丹'),
+        new Pair('陈柯璟', '于阅'),
       ],
       [
-        new Pair('于阅'), new Pair('刘耘松', '叶恒铭'),
-        new Pair('熊晨伊', '代一尘'), new Pair('马亚勋', '李博文'),
-        new Pair('吴子墨', '邵振琦'), new Pair('邓轶辰', '李庭葳')
+        new Pair('x'), new Pair('李彦节', '吴子墨'),
+        new Pair('贺奥凯', '马亚勋'), new Pair('黄启宸', '李博文'),
+        new Pair('叶恒铭', '杨曜铭'), new Pair('x')
       ],
       [
-        new Pair('李丞阳', '鲍奕丞'),
-        new Pair('姜俊衔', '龚雪丹'), new Pair('艾子喻', '单俊杰'),
-        new Pair('隆竞瑶', '杜卓航'), new Pair('王浩宇'), new Pair('x')
+        new Pair('隆竞瑶', '杜卓航'),
+        new Pair('韩语哲', '李梓维'), new Pair('郑光朔', '王奕霖'),
+        new Pair('宋欣哲', '唐梓耀'), new Pair('刘一诺', '周加灵'), new Pair('x')
       ]
     ];
     this.currentWeeks = 0;
@@ -123,9 +123,33 @@ class Seats {
         }
       }
     }
-    this.seats[4].unshift(new Pair('鲁唐扬真'))
-    for (let i = 0; i <= 3; i++) {
-      this.seats[i].unshift(new Pair('x'))
+    // 处理鲁唐扬真
+    if (this.seats[3][5].first !== 'x') {
+      if (this.seats[2][5].first !== 'x') {
+        this.seats[1][5] = this.seats[2][5];
+      }
+      this.seats[2][5] = this.seats[3][5];
+    }
+
+    for (let i = 5; i > 0; i--) {
+      this.seats[3][i] = this.seats[3][i - 1];
+    }
+    this.seats[3][0] = new Pair('鲁唐扬真')
+
+    // 处理每个人的前空位
+    for (let i = 1; i < this.seats.length; i++) {
+      for (let j = 0; j < this.seats[i].length - 1; j++) {
+        if (this.seats[i][j].first === 'x' && this.seats[i][j + 1].first !== 'x') {
+          this.seats[i][j] = this.seats[i][j + 1];
+          this.seats[i][j + 1] = new Pair('x');
+        }
+      }
+      for (let j = 0; j < this.seats[i].length - 1; j++) {
+        if (this.seats[i][j].first === 'x' && this.seats[i][j + 1].first !== 'x') {
+          this.seats[i][j] = this.seats[i][j + 1];
+          this.seats[i][j + 1] = new Pair('x');
+        }
+      }
     }
   }
 
