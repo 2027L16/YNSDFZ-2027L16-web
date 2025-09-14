@@ -44,9 +44,11 @@ export default function SeatPage() {
   const [formattedData, setFormattedData] = useState<Pair[][]>(rows);
   const [loading, setLoading] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // 监听系统主题变化
   useEffect(() => {
+    setMounted(true);
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     setIsDarkMode(mediaQuery.matches);
 
@@ -57,6 +59,10 @@ export default function SeatPage() {
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   // 创建 Material-UI 主题
   const theme = createTheme({
@@ -120,13 +126,19 @@ export default function SeatPage() {
       // 转换数据结构
       const rows = [];
       const colCount = Object.keys(data).length;
-      const rowCount = data[0].length;
-
-      for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+      let maxcount = 0;
+      for (let i = 0; i < colCount; i++) {
+        maxcount = Math.max(maxcount, data[i].length);
+      }
+      for (let rowIndex = 0; rowIndex < maxcount; rowIndex++) {
         const row = [];
         for (let colIndex = 0; colIndex < colCount; colIndex++) {
-          const column = data[colIndex.toString()];
-          row.push(column?.[rowIndex] || { first: 'x', second: 'None' });
+          const column = data[colIndex];
+          if (column.length < maxcount) {
+            if (rowIndex < maxcount - column.length) row.push({ first: 'x', second: 'None' });
+            else row.push(column?.[rowIndex - (maxcount - column.length)]);
+          }
+          else row.push(column?.[rowIndex]);
         }
         rows.push(row);
       }
@@ -150,11 +162,11 @@ export default function SeatPage() {
           justifyContent: 'center',
           gap: 4,
           p: 2,
-          backgroundColor: 'var(--background)',
+          bgcolor: theme.palette.background.default,
         }}>
           <Box sx={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <Typography variant="body1" className='text-[var(--foreground)] mb-2'>选择要查询的那天（选下周某天）</Typography>
+              <Typography variant="body1" className='text-[var(--foreground)] mb-2'>选择要查询的那天</Typography>
               <DatePicker
                 value={selectedTime}
                 onChange={(newValue) => newValue && setSelectedTime(newValue)}
